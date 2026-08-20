@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
     const [selectedSlot, setSelectedSlot] = useState(null);
   
     const handleSlotSelection = (slot) => {
@@ -11,13 +13,18 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
   
     const handleFormSubmit = (e) => {
       e.preventDefault();
-      onSubmit({ name, phoneNumber });
-      setName('');
+      onSubmit({ name, phoneNumber, date, time, selectedSlot});
+      setName(''); 
       setPhoneNumber('');
+      setDate('');
+      setTime('');
     };
   
     return (
       <form onSubmit={handleFormSubmit} className="appointment-form">
+        <h3>Book Appointment with {doctorName}</h3>
+        <p>Specialty: {doctorSpeciality}</p>
+
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
@@ -38,7 +45,27 @@ const AppointmentFormIC = ({ doctorName, doctorSpeciality, onSubmit }) => {
             required
           />
         </div>
-        <button type="submit">Book Now</button>
+        <div className="form-group">y
+            <label htmlfor="date">Date:</label>
+            <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required 
+            />
+        </div>
+        <div className="form-group">
+        <label htmlFor="time">Time Slot:</label>
+        <input
+        type="time"
+        id="time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+        required
+        />
+    </div>
+        <button type="submit" className="btn btn-primary mt-2">Book Now</button>
       </form>
     );
   };
