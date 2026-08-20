@@ -6,7 +6,7 @@ import Sign_Up from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import Notification from './Components/Notification/Notification';
-import Report from './Components/Reportlayout/ReportLayout';
+import Report from './Components/ReportLayout/ReportLayout';
 
 
 function App() {
