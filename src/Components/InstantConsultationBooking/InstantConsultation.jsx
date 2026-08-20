@@ -3,8 +3,9 @@ import './InstantConsultation.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import FindDoctorSearchIC from './FindDoctorSearchIC/FindDoctorSearchIC';
 import DoctorCardIC from './DoctorCardIC/DoctorCardIC';
+import ReviewForm from '../ReviewForm/ReviewForm';
 
-const InstantConsultation = () => {
+    const InstantConsultation = () => {
     const [searchParams] = useSearchParams();
     const [doctors, setDoctors] = useState([]);
     const [filteredDoctors, setFilteredDoctors] = useState([]);
@@ -77,6 +78,7 @@ const InstantConsultation = () => {
                 ''
                 )}
             </div>
+            <ReviewForm/
         </div>
         </center>
     )
