@@ -1,41 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div>
-      <nav className="nav__bar">
-        <div className="nav__logo">
-          <a href="/">StayHealthy</a>
-        </div>
-        <div className="nav__icon">
-          <svg
-            version="1.1"
-            id="Capa_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            viewBox="0 0 512 512"
-            style={{ enableBackground: 'new 0 0 512 512' }}
-            xmlSpace="preserve"
-          >
+    <nav className="nav__bar">
+      {/* Navigation logo section */}
+      <div className="nav__logo">
+        <a href="/">
+          StayHealthy 
+          <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
+            <title>Doctor With Stethoscope SVG icon</title>
             <g>
               <g>
-                <path d="M380.441,184.087c-5.345-4.558-13.287-3.922-17.845,1.423c-26.65,31.258-65.419,49.197-106.596,49.197 c-41.178,0-79.946-17.939-106.596-49.197c-4.558-5.345-12.5-5.981-17.845-1.423c-5.345,4.559-5.982,12.5-1.423,17.845 c31.144,36.526,76.435,57.477,125.864,57.477c49.429,0,94.72-20.951,125.864-57.477 C386.423,196.587,385.786,188.646,380.441,184.087z" />
-                <path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256s256-114.615,256-256S397.385,0,256,0z M256,482.667 c-125.013,0-226.667-101.653-226.667-226.667S130.987,29.333,256,29.333S482.667,130.987,482.667,256 S381.013,482.667,256,482.667z" />
+                <path d="M499.8,10c91.7,0,166,74.3,166,166c0,91.7-74.3,166-166,166c-91.7,0-166-74.3-166-166C333.8,84.3,408.1,10,499.8,10z"></path>
+                <path d="M499.8,522.8c71.2,0,129.1-58.7,129.1-129.1H370.6C370.6,464.1,428.6,522.8,499.8,522.8z"></path>
               </g>
             </g>
           </svg>
-        </div>
-        <nav className="nav__links">
-          <ul>
-            <li><a href="/">Sign Up</a></li>
-            <li><a href="/">Login</a></li>
-          </ul>
-        </nav>
-      </nav>
-    </div>
+        </a>
+        <span>.</span>
+      </div>
+
+      {/* Navigation icon section with onClick event listener */}
+      <div className="nav__icon" onClick={handleClick}>
+        <i className={`fa ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
+      </div>
+
+      {/* Unordered list for navigation links */}
+      <ul className={`nav__links ${isOpen ? 'active' : ''}`}>
+        <li className="link">
+          <a href="/">Home</a>
+        </li>
+        <li className="link">
+          <a href="#">Appointments</a>
+        </li>
+        <li className="link">
+          <Link to="/Sign_Up">
+            <button className="btn1">Sign Up</button>
+          </Link>
+        </li>
+        <li className="link">
+          <a href="/Login">
+            <button className="btn1">Login</button>
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 };
 
