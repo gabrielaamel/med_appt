@@ -1,74 +1,111 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config';
 import './Login.css';
 
 const Login = () => {
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
   const navigate = useNavigate();
 
-  const login = (e) => {
-    e.preventDefault();
-    
-    // Validación básica de campos vacíos
-    if (!email || !password) {
-      setError('Please fill in all fields');
-      return;
+  // Check if user is already authenticated, then redirect to home page
+  useEffect(() => {
+    if (sessionStorage.getItem("auth-token")) {
+      navigate("/");
     }
+  }, []);
 
-    // Guardamos los datos de sesión y simulamos el login exitoso
-    sessionStorage.setItem("email", email);
-    alert('Login Successful!');
-    navigate('/');
+  // Function to handle login form submission
+  const login = async (e) => {
+    e.preventDefault();
+
+    // Send a POST request to the login API endpoint
+    const res = await fetch(`${API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    // Parse the response JSON
+    const json = await res.json();
+
+    if (json.authtoken) {
+      // If authentication token is received, store it in session storage
+      sessionStorage.setItem('auth-token', json.authtoken);
+      sessionStorage.setItem('email', email);
+      
+      // Extract name from email and store it
+      const userName = email.split('@')[0];
+      sessionStorage.setItem('name', userName);
+
+      // Redirect to home page and reload the window
+      navigate('/');
+      window.location.reload();
+    } else {
+      // Handle errors if authentication fails
+      if (json.errors) {
+        for (const error of json.errors) {
+          alert(error.msg);
+        }
+      } else {
+        alert(json.error);
+      }
+    }
   };
 
   return (
-    <div className="container" style={{ marginTop: '5%' }}>
-      <div className="login-grid">
-        <div className="login-text">
-          <h1>Login</h1>
-        </div>
-        <div className="login-text1" style={{ textAlign: 'left' }}>
-          New to StayHealthy? <Link to="/Sign_Up" style={{ color: '#2190FF' }}>Sign Up</Link>
-        </div>
-        <div className="login-form">
-          <form onSubmit={login}>
-            {error && <div className="error-message" style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+    <div>
+      <div className="container">
+        <div className="login-grid">
+          <div className="login-text">
+            <h2>Login</h2>
+          </div>
+          <div className="login-text">
+            Are you a new member? <span><Link to="/Sign_Up" style={{ color: '#2190FF' }}>Sign Up Here</Link></span>
+          </div>
+          <br />
+          <div className="login-form">
+            <form onSubmit={login}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  className="form-control" 
+                  placeholder="Enter your email" 
+                  aria-describedby="helpId" 
+                  required
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                className="form-control" 
-                placeholder="Enter your email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} 
-                required 
-              />
-            </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="form-control"
+                  placeholder="Enter your password"
+                  aria-describedby="helpId"
+                  required
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input 
-                type="password" 
-                name="password" 
-                id="password" 
-                className="form-control" 
-                placeholder="Enter your password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)} 
-                required 
-              />
-            </div>
-
-            <div className="btn-group">
-              <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
-            </div>
-          </form>
+              <div className="btn-group">
+                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
