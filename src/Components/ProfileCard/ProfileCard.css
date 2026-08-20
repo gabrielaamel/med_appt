@@ -1,47 +1,72 @@
-.profile-card {
+/* Styles for the container holding the profile information */
+.profile-container {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 15% auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: #fff;
-    text-align: left;
-  }
-  
-  .profile-card h2 {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+/* Styles for the heading within the profile container */
+.profile-container h1 {
+    margin-top: 0;
+}
+
+/* Styles for the form within the profile container */
+.profile-container form {
     margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .profile-details p {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  
-  .profile-form label {
+}
+
+/* Styles for labels within the profile container */
+.profile-container label {
     display: block;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  
-  .profile-form input {
+    margin-bottom: 10px;
+}
+
+/* Styles for text and email input fields within the profile container */
+.profile-container input[type="text"],
+.profile-container input[type="email"] {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  
-  .btn-edit, .btn-save {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
+}
+
+/* Styles for buttons within the profile container */
+.profile-container button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #2190ff;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .btn-edit:hover, .btn-save:hover {
-    background-color: #0056b3;
-  }
+}
+
+/* Styles for the container holding additional profile details */
+.profile-details {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+/* Styles for headings within the profile details container */
+.profile-details h2 {
+    margin-top: 0;
+}
+
+/* Styles for paragraphs within the profile details container */
+.profile-details p {
+    margin-bottom: 10px;
+}
+
+/* Styles for buttons within the profile details container */
+.profile-details button {
+    background-color: #2190ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
