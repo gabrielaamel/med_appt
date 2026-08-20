@@ -78,7 +78,7 @@ import ReviewForm from '../ReviewForm/ReviewForm';
                 ''
                 )}
             </div>
-            <ReviewForm/
+            <ReviewForm/>
         </div>
         </center>
     )
