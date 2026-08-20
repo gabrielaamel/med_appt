@@ -1,18 +1,13 @@
-# React + Vite
+# StayHealthy Medical Appointment Booking Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website is a part of IBM's Front-End Development Capstone Project. It's a fully functional medical appointment booking web application which allows users to book instantly or on a preferred date according to their convenience. It also allows users to provide feedback on medical practitioners for constant improvement and system upgrades, as well as view and download their medical reports.
 
-Currently, two official plugins are available:
+## Features
+- **User Authentication:** Sign up and login functionality with local/session storage management.
+- **Doctor Consultation & Booking:** Browse doctors, filter by specialty, and book appointments instantly or on a custom date.
+- **Notifications:** Real-time notification card tracking upcoming appointments with cancellation capability.
+- **User Profile:** Dedicated profile management to view and edit personal details.
+- **Reviews & Reports:** Leave feedback on doctors and access medical reports.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Live Demo
+You can view the deployed site here: [StayHealthy Live App](https://test-med-app-1.onrender.com)
