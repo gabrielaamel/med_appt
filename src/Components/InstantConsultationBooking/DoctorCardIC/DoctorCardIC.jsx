@@ -80,6 +80,12 @@ const DoctorCardIC = ({ name, speciality, experience, ratings, profilePic }) => 
                   <div className="doctor-card-detail-experience">{experience} years experience</div>
                   <div className="doctor-card-detail-consultationfees">Ratings: {ratings}</div>
                 </div>
+                <div>
+          <button className="book-appointment-btn">
+            <div>Book Appointment</div>
+            <div>No Booking Fee</div>
+          </button>
+        </div>
               </div>
 
               {appointments.length > 0 ? (
