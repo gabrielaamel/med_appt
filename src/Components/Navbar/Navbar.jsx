@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -9,13 +9,27 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  // ⭐ LOGOUT FUNCTION (Mark requires this)
+  const handleLogout = () => {
+    sessionStorage.removeItem("auth-token");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("name");
+    window.location.href = "/login";
+  };
+
   return (
     <nav className="nav__bar">
       {/* Navigation logo section */}
       <div className="nav__logo">
         <a href="/">
-          StayHealthy 
-          <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{ fill: '#3685fb' }}>
+          StayHealthy
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="26"
+            width="26"
+            viewBox="0 0 1000 1000"
+            style={{ fill: "#3685fb" }}
+          >
             <title>Doctor With Stethoscope SVG icon</title>
             <g>
               <g>
@@ -28,29 +42,46 @@ const Navbar = () => {
         <span>.</span>
       </div>
 
-      {/* Navigation icon section with onClick event listener */}
+      {/* Navigation icon section */}
       <div className="nav__icon" onClick={handleClick}>
-        <i className={`fa ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        <i className={`fa ${isOpen ? "fa-times" : "fa-bars"}`}></i>
       </div>
 
-      {/* Unordered list for navigation links */}
-      <ul className={`nav__links ${isOpen ? 'active' : ''}`}>
+      {/* Navigation links */}
+      <ul className={`nav__links ${isOpen ? "active" : ""}`}>
         <li className="link">
           <a href="/">Home</a>
         </li>
+
         <li className="link">
           <a href="#">Appointments</a>
         </li>
-        <li className="link">
-          <Link to="/Sign_Up">
-            <button className="btn1">Sign Up</button>
-          </Link>
-        </li>
-        <li className="link">
-          <Link to="/Login">
-            <button className="btn1">Login</button>
-          </Link>
-        </li>
+
+        {/* If NOT logged in → show Sign Up + Login */}
+        {!sessionStorage.getItem("auth-token") && (
+          <>
+            <li className="link">
+              <Link to="/Sign_Up">
+                <button className="btn1">Sign Up</button>
+              </Link>
+            </li>
+
+            <li className="link">
+              <Link to="/Login">
+                <button className="btn1">Login</button>
+              </Link>
+            </li>
+          </>
+        )}
+
+        {/* If logged in → show Logout */}
+        {sessionStorage.getItem("auth-token") && (
+          <li className="link">
+            <button className="btn1" onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );
